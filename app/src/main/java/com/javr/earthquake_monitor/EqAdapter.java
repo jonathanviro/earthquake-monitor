@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.javr.earthquake_monitor.databinding.EqListItemBinding;
+
 public class EqAdapter extends ListAdapter<Earthquake, EqAdapter.EqViewHolder> {
 
     public static final DiffUtil.ItemCallback<Earthquake> DIFF_CALLBACK =
@@ -33,8 +35,9 @@ public class EqAdapter extends ListAdapter<Earthquake, EqAdapter.EqViewHolder> {
     @NonNull
     @Override
     public EqAdapter.EqViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.eq_list_item, parent, false);
-        return new EqViewHolder(view);
+        //CAMBIANDO A BINDING
+        EqListItemBinding binding = EqListItemBinding.inflate(LayoutInflater.from(parent.getContext()));
+        return new EqViewHolder(binding);
     }
 
     @Override
@@ -45,21 +48,20 @@ public class EqAdapter extends ListAdapter<Earthquake, EqAdapter.EqViewHolder> {
     }
 
     class EqViewHolder extends RecyclerView.ViewHolder{
-    private TextView magnitudeText;
-    private TextView placeText;
+        //CAMBIANDO A BINDING
+        private EqListItemBinding binding;
 
-        public EqViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public EqViewHolder(@NonNull EqListItemBinding binding) {
+            super(binding.getRoot());
 
-            magnitudeText = itemView.findViewById(R.id.txtMagnitude);
-            placeText = itemView.findViewById(R.id.txtPlace);
-
+            this.binding = binding;
         }
 
         public void bind(Earthquake earthquake){
-            magnitudeText.setText(String.valueOf(earthquake.getMagnitude()));
-            placeText.setText(earthquake.getPlace());
+            binding.txtMagnitude.setText(String.valueOf(earthquake.getMagnitude()));
+            binding.txtPlace.setText(earthquake.getPlace());
 
+            binding.executePendingBindings();
         }
     }
 }
