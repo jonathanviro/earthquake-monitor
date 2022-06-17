@@ -19,6 +19,16 @@
             tools:itemCount="5"
             tools:listitem="@layout/eq_list_item"/>
 
+        <TextView
+            android:id="@+id/txtEmptyView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No hay terremotos ahora"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:visibility="gone"/>
 
     </FrameLayout>
 </layout>
